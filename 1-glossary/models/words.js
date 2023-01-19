@@ -14,8 +14,16 @@ module.exports = {
     })
   },
 
-  insert: function () {
-
+  insert: function (params) {
+    return new Promise((resolve, reject) => {
+      Word.create(params, (err, document) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(document)
+        }
+      })
+    })
   },
 
   update: function () {

@@ -6,7 +6,7 @@ const { Schema } = mongoose;
 // 2. Set up any schema and models needed by the app
 const wordSchema = new Schema ({
   term: {type: String},
-  defintion: {type: String},
+  definition: {type: String},
 });
 
 const Word = db.model('Word', wordSchema)
