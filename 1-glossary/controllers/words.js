@@ -14,6 +14,7 @@ module.exports = {
   },
 
   post: function (req, res) {
+    console.log(req.body, 'body')
     model.insert(req.body)
       .then((word) => {
         res.status(201).json(word);

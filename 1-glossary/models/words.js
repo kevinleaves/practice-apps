@@ -15,6 +15,7 @@ module.exports = {
   },
 
   insert: function (params) {
+    console.log(params, params)
     return new Promise((resolve, reject) => {
       Word.create(params, (err, document) => {
         if (err) {
