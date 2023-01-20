@@ -62,8 +62,15 @@ const App = () => {
   }
 
   const handleDelete = (entry) => {
-    console.log('delete')
-    console.log(entry)
+    axios.delete('/api/words', {
+      data: {
+        _id: entry._id
+      }
+    })
+      .then(() => {
+        updateWords()
+      })
+      .catch((err) => console.log(err))
   }
 
   return (

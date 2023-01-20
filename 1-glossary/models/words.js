@@ -2,7 +2,6 @@ const Word = require('../server/db.js')
 
 module.exports = {
   getAll: function () {
-    console.log('getAll is running')
     return new Promise ((resolve, reject) => {
       Word.find({}, (err, result) => {
         if (err) {
@@ -15,7 +14,6 @@ module.exports = {
   },
 
   insert: function (params) {
-    console.log(params, params)
     return new Promise((resolve, reject) => {
       Word.create(params, (err, document) => {
         if (err) {
@@ -43,8 +41,13 @@ module.exports = {
     })
   },
 
-  delete: function () {
-
+  delete: function (params) {
+    return new Promise ((resolve, reject) => {
+      Word.findByIdAndDelete(params._id, (err, result) => {
+        if (err) reject(err)
+        resolve(result)
+      })
+    })
   }
 }
 
