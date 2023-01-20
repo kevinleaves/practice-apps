@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import AddWords from './AddWords.jsx'
+import SearchBar from './SearchBar.jsx'
 
 import WordList from './WordList.jsx'
 
@@ -11,6 +12,8 @@ const App = () => {
   // add input state
   const [addWord, setAddWord] = useState('');
   const [addDefinition, setAddDefinition] = useState('')
+
+  const [search, setSearch] = useState('')
 
   const updateWords = () => {
     axios.get('/api/words')
@@ -23,18 +26,27 @@ const App = () => {
     updateWords()
   },[])
 
+  const handleSearchChange = () => {
+    setSearch(event.target.value)
+  }
+
+const searched = !search ? words : words.filter((word) => word.term.toLowerCase().includes(search.toLowerCase()))
+
   const handleAddChange = () => {
     setAddWord(event.target.value)
   }
   const handleDefinitionChange = () => {
     setAddDefinition(event.target.value)
   }
+
   const handleSubmit = () => {
     event.preventDefault()
     let word = {
       term: addWord,
       definition: addDefinition
     }
+    setAddWord('')
+    setAddDefinition('')
     axios.post('/api/words', word)
       .then(() => {
         updateWords()
@@ -44,14 +56,14 @@ const App = () => {
       })
   }
 
-  const handleUpdate = (entry) => {
-    let updatedWord = prompt('edit the word')
-    let updatedDefinition = prompt('edit the definition')
+  const handleUpdate = (updated) => {
+    // let updatedWord = prompt('edit the word')
+    // let updatedDefinition = prompt('edit the definition')
 
     let updatedEntry = {
-      _id: entry._id,
-      term: updatedWord,
-      definition: updatedDefinition
+      _id: updated._id,
+      term: updated.term,
+      definition: updated.definition
     }
 
     axios.patch('/api/words', updatedEntry)
@@ -76,13 +88,14 @@ const App = () => {
   return (
     <>
      <h1>WE HAVE SOME STRUCTURE NOW</h1>
-     <WordList words={words} deleteEntry={handleDelete} update={handleUpdate}/>
-     <AddWords addWord={addWord} handleAddChange={handleAddChange}
-     handleDefinitionChange={handleDefinitionChange} addDefinition={addDefinition} onSubmit={handleSubmit}
-     />
+     <AddWords addWord={addWord}
+     handleAddChange={handleAddChange}
+     handleDefinitionChange={handleDefinitionChange} addDefinition={addDefinition} onSubmit={handleSubmit}/>
+     <SearchBar search={search}
+     onChange={handleSearchChange}/>
+     <WordList words={searched} deleteEntry={handleDelete} update={handleUpdate}/>
     </>
   )
 }
-
 
 export default App

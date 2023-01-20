@@ -43,6 +43,5 @@ module.exports = {
         console.log(err)
         res.sendStatus(404)
       })
-
   },
 }
