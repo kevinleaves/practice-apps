@@ -1,7 +1,7 @@
 import React from "react"
 import { useState } from 'react'
 
-const AddWords = ({ handleAddChange, addWord, handleDefinitionChange, addDefinition, onSubmit }) => {
+const AddWords = ({ handleAddChange, addWord, handleDefinitionChange, addDefinition, onSubmit, setWord, setDefinition }) => {
 
   const [clicked, setClicked] = useState(false)
 
@@ -14,6 +14,12 @@ const AddWords = ({ handleAddChange, addWord, handleDefinitionChange, addDefinit
     setClicked(true)
   }
 
+  const resetFields = () => {
+    setClicked(false)
+    setWord('')
+    setDefinition('')
+  }
+
   return (
     <div>
       {clicked &&
@@ -22,7 +28,9 @@ const AddWords = ({ handleAddChange, addWord, handleDefinitionChange, addDefinit
         <input onChange={handleDefinitionChange} value={addDefinition} placeholder='add its definition here'/>
       </form>}
 
-      <button onClick={handleAddClick}>Add a word!</button>
+      <button onClick={handleAddClick}>{!clicked ? 'Add a word!' : 'Save!'}</button>
+
+      {clicked && <button onClick={() => resetFields()}>discard changes</button>}
     </div>
   )
 }

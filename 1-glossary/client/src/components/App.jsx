@@ -87,7 +87,9 @@ const App = () => {
      <h1>Glossary</h1>
      <AddWords addWord={addWord}
      handleAddChange={handleAddChange}
-     handleDefinitionChange={handleDefinitionChange} addDefinition={addDefinition} onSubmit={handleAddSubmit}/>
+     handleDefinitionChange={handleDefinitionChange} addDefinition={addDefinition} onSubmit={handleAddSubmit}
+     setWord={setAddWord} setDefinition={setAddDefinition}
+     />
      <SearchBar search={search}
      onChange={handleSearchChange}/>
      <WordList words={searched} deleteEntry={handleDelete} update={handleUpdateSubmit}/>
