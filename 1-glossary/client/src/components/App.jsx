@@ -39,7 +39,7 @@ const App = () => {
     setAddDefinition(event.target.value)
   }
 
-  const handleSubmit = () => {
+  const handleAddSubmit = () => {
     event.preventDefault()
     let word = {
       term: addWord,
@@ -57,9 +57,6 @@ const App = () => {
   }
 
   const handleUpdateSubmit = (updated) => {
-    // let updatedWord = prompt('edit the word')
-    // let updatedDefinition = prompt('edit the definition')
-
     let updatedEntry = {
       _id: updated._id,
       term: updated.term,
@@ -90,7 +87,7 @@ const App = () => {
      <h1>Glossary</h1>
      <AddWords addWord={addWord}
      handleAddChange={handleAddChange}
-     handleDefinitionChange={handleDefinitionChange} addDefinition={addDefinition} onSubmit={handleSubmit}/>
+     handleDefinitionChange={handleDefinitionChange} addDefinition={addDefinition} onSubmit={handleAddSubmit}/>
      <SearchBar search={search}
      onChange={handleSearchChange}/>
      <WordList words={searched} deleteEntry={handleDelete} update={handleUpdateSubmit}/>
