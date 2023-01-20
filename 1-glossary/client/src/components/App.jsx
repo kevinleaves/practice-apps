@@ -30,7 +30,7 @@ const App = () => {
     setSearch(event.target.value)
   }
 
-const searched = !search ? words : words.filter((word) => word.term.toLowerCase().includes(search.toLowerCase()))
+  const searched = !search ? words : words.filter((word) => word.term.toLowerCase().includes(search.toLowerCase()))
 
   const handleAddChange = () => {
     setAddWord(event.target.value)
@@ -56,7 +56,7 @@ const searched = !search ? words : words.filter((word) => word.term.toLowerCase(
       })
   }
 
-  const handleUpdate = (updated) => {
+  const handleUpdateSubmit = (updated) => {
     // let updatedWord = prompt('edit the word')
     // let updatedDefinition = prompt('edit the definition')
 
@@ -87,13 +87,13 @@ const searched = !search ? words : words.filter((word) => word.term.toLowerCase(
 
   return (
     <>
-     <h1>WE HAVE SOME STRUCTURE NOW</h1>
+     <h1>Glossary</h1>
      <AddWords addWord={addWord}
      handleAddChange={handleAddChange}
      handleDefinitionChange={handleDefinitionChange} addDefinition={addDefinition} onSubmit={handleSubmit}/>
      <SearchBar search={search}
      onChange={handleSearchChange}/>
-     <WordList words={searched} deleteEntry={handleDelete} update={handleUpdate}/>
+     <WordList words={searched} deleteEntry={handleDelete} update={handleUpdateSubmit}/>
     </>
   )
 }

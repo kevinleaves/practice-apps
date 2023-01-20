@@ -2,27 +2,11 @@ const Word = require('../server/db.js')
 
 module.exports = {
   getAll: function () {
-    return new Promise ((resolve, reject) => {
-      Word.find({}, (err, result) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(result)
-        }
-      })
-    })
+    return Word.find({})
   },
 
   insert: function (params) {
-    return new Promise((resolve, reject) => {
-      Word.create(params, (err, document) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(document)
-        }
-      })
-    })
+    return Word.create(params)
   },
 
   update: function (params) {
@@ -33,21 +17,11 @@ module.exports = {
         definition: params.definition
       }
     }
-    return new Promise ((resolve, reject) => {
-      Word.findOneAndUpdate(query, updated, (err, foundEntry) => {
-        if (err) reject(err)
-        resolve(foundEntry)
-      })
-    })
+    return Word.findOneAndUpdate(query, updated)
   },
 
   delete: function (params) {
-    return new Promise ((resolve, reject) => {
-      Word.findByIdAndDelete(params._id, (err, result) => {
-        if (err) reject(err)
-        resolve(result)
-      })
-    })
+    return Word.findByIdAndDelete(params._id)
   }
 }
 

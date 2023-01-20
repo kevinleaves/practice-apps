@@ -40,7 +40,7 @@ module.exports = {
         res.status(200).json(data)
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err, 'err delete')
         res.sendStatus(404)
       })
   },
