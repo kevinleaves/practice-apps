@@ -27,11 +27,25 @@ module.exports = {
     })
   },
 
-  update: function () {
-
+  update: function (params) {
+    const query = {_id: params._id}
+    const updated = {
+      $set: {
+        term: params.term,
+        definition: params.definition
+      }
+    }
+    return new Promise ((resolve, reject) => {
+      Word.findOneAndUpdate(query, updated, (err, foundEntry) => {
+        if (err) reject(err)
+        resolve(foundEntry)
+      })
+    })
   },
 
   delete: function () {
 
   }
 }
+
+// db.words.findOneAndUpdate({term: 'updated'}, {$set: {term: 'updated2', definition: "updated3"}})

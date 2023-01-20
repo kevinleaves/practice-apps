@@ -27,8 +27,15 @@ module.exports = {
   },
 
   patch: function (req, res) {
-    console.log('hi')
-    console.log(req)
+    console.log(req.body, 'patchreqbody')
+    model.update(req.body)
+      .then ((foundEntry) => {
+        res.status(200).json(foundEntry)
+      })
+      .catch((err) => {
+        console.log(err, 'err patching')
+        res.sendStatus(404)
+      })
   },
 
   delete: function (req, res) {
