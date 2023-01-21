@@ -1,13 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
 
-const BillingInfo = () => {
+const BillingInfo = ({ formState, setFormState }) => {
 
   const [billingInputs, setBillingInputs] = useState({
     creditcard:'',
     expdate:'',
     cvv:'',
-    zip:''
+    billingzip:''
   })
 
   const handleChange = (e) => {
@@ -18,17 +18,28 @@ const BillingInfo = () => {
     })
   }
 
+  const handleFormChange = () => {
+    setFormState({
+      ...formState,
+      displayBillingInfo: false,
+      displayConfirmationInfo: true
+    })
+  }
+
   return (
     <>
-      <form>
-        {Object.entries(billingInputs).map(([inputType, value], index) => {
-          return <input key={index} placeholder={`enter your ${inputType} here`} name={inputType} value={value} onChange={handleChange}/>
-        })}
-      </form>
-
+    {formState.displayBillingInfo &&
+      <>
+        <form>
+          {Object.entries(billingInputs).map(([inputType, value], index) => {
+            return <input key={index} placeholder={`enter your ${inputType} here`} name={inputType} value={value} onChange={handleChange}/>
+          })}
+        </form>
+        <button onClick={handleFormChange}>NEXT</button>
+      </>
+    }
     </>
   )
-
 }
 
 

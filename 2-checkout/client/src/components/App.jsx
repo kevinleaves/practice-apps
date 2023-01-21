@@ -6,13 +6,30 @@ import BillingInfo from './BillingInfo.jsx'
 
 const App = () => {
 
+  const [formState, setFormState] = useState({
+    displayCheckoutPage: true,
+    displayAccountInfo: false,
+    displayShippingInfo: false,
+    displayBillingInfo: false,
+    displayConfirmationInfo: false,
+  })
+
+  const handleFormChange = () => {
+    setFormState({
+      ...formState,
+      displayCheckoutPage: false,
+      displayAccountInfo: true,
+    })
+  }
 
   return (
     <>
-      <button>CHECKOUT</button>
-      <AccountInfo/>
-      <ShippingInfo/>
-      <BillingInfo/>
+      {formState.displayCheckoutPage &&
+        <button onClick={handleFormChange}>CHECKOUT</button>
+      }
+      <AccountInfo formState={formState} setFormState={setFormState}/>
+      <ShippingInfo formState={formState} setFormState={setFormState}/>
+      <BillingInfo formState={formState} setFormState={setFormState}/>
     </>
   )
 }

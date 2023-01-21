@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-const AccountInfo = () => {
+const AccountInfo = ({ formState, setFormState }) => {
 
   const [accountInputs, setAccountInputs] = useState({
     name: '',
@@ -17,15 +17,28 @@ const AccountInfo = () => {
     })
   }
 
+  const handleFormChange = () => {
+    setFormState({
+      ...formState,
+      displayAccountInfo: false,
+      displayShippingInfo: true,
+    })
+  }
+
   return (
     <>
-    <h2>CREATE ACCOUNT HERE</h2>
+      {
+      formState.displayAccountInfo &&
+      <>
+      <h2>CREATE ACCOUNT HERE</h2>
       <form>
         {Object.entries(accountInputs).map(([key, value], index) =>
           <input key={index} placeholder={`enter your ${key} here`} name={key} value={value} onChange={handleChange}/>
         )}
       </form>
-      <button>NEXT</button>
+      <button onClick={handleFormChange}>NEXT</button>
+      </>
+      }
     </>
   )
 }

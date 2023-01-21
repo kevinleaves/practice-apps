@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-const ShippingInfo = () => {
+const ShippingInfo = ({ formState, setFormState }) => {
 
   const [shippingInputs, setShippingInputs] = useState({
     line1: '',
@@ -20,14 +20,26 @@ const ShippingInfo = () => {
     })
   }
 
+  const handleFormChange = () => {
+  setFormState({
+    ...formState,
+    displayShippingInfo: false,
+    displayBillingInfo: true
+  })
+}
+
   return (
     <>
-      <form>
-        {Object.entries(shippingInputs).map(([inputType, value], index) => {
-          return <input key={index} placeholder={`enter your ${inputType} here`} name={inputType} value={value} onChange={handleChange}/>
-        })}
-      </form>
-
+      {formState.displayShippingInfo &&
+      <>
+        <form>
+          {Object.entries(shippingInputs).map(([inputType, value], index) => {
+            return <input key={index} placeholder={`enter your ${inputType} here`} name={inputType} value={value} onChange={handleChange}/>
+          })}
+        </form>
+        <button onClick={handleFormChange}>NEXT</button>
+      </>
+      }
     </>
   )
 
