@@ -11,8 +11,9 @@ const AccountInfo = ({ formState, setFormState }) => {
 
   const handleChange = (e) => {
     const {name, value} = e.target;
-    setInputs({
-      ...inputs,
+    console.log(name, value)
+    setAccountInputs({
+      ...accountInputs,
      [name]: value
     })
   }

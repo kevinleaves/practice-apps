@@ -32,6 +32,7 @@ const ShippingInfo = ({ formState, setFormState }) => {
     <>
       {formState.displayShippingInfo &&
       <>
+        <h2>ENTER SHIPPING INFO</h2>
         <form>
           {Object.entries(shippingInputs).map(([inputType, value], index) => {
             return <input key={index} placeholder={`enter your ${inputType} here`} name={inputType} value={value} onChange={handleChange}/>

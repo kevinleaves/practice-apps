@@ -30,6 +30,7 @@ const BillingInfo = ({ formState, setFormState }) => {
     <>
     {formState.displayBillingInfo &&
       <>
+        <h2>ENTER BILLING INFO</h2>
         <form>
           {Object.entries(billingInputs).map(([inputType, value], index) => {
             return <input key={index} placeholder={`enter your ${inputType} here`} name={inputType} value={value} onChange={handleChange}/>
