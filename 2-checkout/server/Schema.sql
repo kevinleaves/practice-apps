@@ -1,5 +1,9 @@
 DROP DATABASE IF EXISTS checkout;
 
+CREATE DATABASE checkout;
+
+USE checkout;
+
 CREATE TABLE IF NOT EXISTS responses (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   firstname VARCHAR(25),
