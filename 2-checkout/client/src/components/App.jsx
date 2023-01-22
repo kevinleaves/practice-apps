@@ -5,7 +5,23 @@ import ShippingInfo from './ShippingInfo.jsx'
 import BillingInfo from './BillingInfo.jsx'
 
 const App = () => {
+  const [inputs, setInputs] = useState({
+    name: '',
+    email: '',
+    password: '',
+    line1: '',
+    line2: '',
+    city: '',
+    state: '',
+    zipcode: '',
+    phoneNumber: '',
+    creditcard:'',
+    expdate:'',
+    cvv:'',
+    billingzip:''
+  })
 
+  console.log(inputs, 'inputs')
   const [formState, setFormState] = useState({
     displayCheckoutPage: true,
     displayAccountInfo: false,
@@ -25,11 +41,16 @@ const App = () => {
   return (
     <>
       {formState.displayCheckoutPage &&
-        <button onClick={handleFormChange}>CHECKOUT</button>
-      }
-      <AccountInfo formState={formState} setFormState={setFormState}/>
-      <ShippingInfo formState={formState} setFormState={setFormState}/>
-      <BillingInfo formState={formState} setFormState={setFormState}/>
+        <button onClick={handleFormChange}>CHECKOUT</button>}
+
+      {formState.displayAccountInfo &&
+        <AccountInfo inputs={inputs} setInputs={setInputs} formState={formState} setFormState={setFormState}/>}
+
+      {formState.displayShippingInfo &&
+      <ShippingInfo inputs={inputs} setInputs={setInputs} formState={formState} setFormState={setFormState}/>}
+
+      {formState.displayBillingInfo &&
+      <BillingInfo inputs={inputs} setInputs={setInputs} formState={formState} setFormState={setFormState}/>}
     </>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-const BillingInfo = ({ formState, setFormState }) => {
+const BillingInfo = ({  inputs, setInputs,formState, setFormState }) => {
 
   const [billingInputs, setBillingInputs] = useState({
     creditcard:'',
@@ -22,24 +22,27 @@ const BillingInfo = ({ formState, setFormState }) => {
     setFormState({
       ...formState,
       displayBillingInfo: false,
-      displayConfirmationInfo: true
+      displayConfirmationInfo: true,
+    })
+    setInputs({
+      ...inputs,
+      creditcard: billingInputs.creditcard,
+      expdate: billingInputs.expdate,
+      cvv: billingInputs.cvv,
+      billingzip: billingInputs.billingzip,
     })
   }
 
   return (
     <>
-    {formState.displayBillingInfo &&
-      <>
-        <h2>ENTER BILLING INFO</h2>
-        <form>
-          {Object.entries(billingInputs).map(([inputType, value], index) => {
-            return <input key={index} placeholder={`enter your ${inputType} here`} name={inputType} value={value} onChange={handleChange}/>
-          })}
-        </form>
-        <button onClick={handleFormChange}>NEXT</button>
-      </>
-    }
-    </>
+      <h2>ENTER BILLING INFO</h2>
+      <form>
+        {Object.entries(billingInputs).map(([inputType, value], index) => {
+          return <input key={index} placeholder={`enter your ${inputType} here`} name={inputType} value={value} onChange={handleChange}/>
+        })}
+      </form>
+      <button onClick={handleFormChange}>NEXT</button>
+  </>
   )
 }
 

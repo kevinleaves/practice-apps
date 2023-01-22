@@ -1,12 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
 
-const AccountInfo = ({ formState, setFormState }) => {
+const AccountInfo = ({ inputs, setInputs, formState, setFormState }) => {
 
   const [accountInputs, setAccountInputs] = useState({
-    name: '',
-    email: '',
-    password: '',
+    name: inputs.name,
+    email: inputs.email,
+    password: inputs.password,
   })
 
   const handleChange = (e) => {
@@ -24,12 +24,16 @@ const AccountInfo = ({ formState, setFormState }) => {
       displayAccountInfo: false,
       displayShippingInfo: true,
     })
+    setInputs({
+      ...inputs,
+      name: accountInputs.name,
+      email: accountInputs.email,
+      password: accountInputs.password
+    })
   }
 
   return (
     <>
-      {
-      formState.displayAccountInfo &&
       <>
       <h2>CREATE ACCOUNT HERE</h2>
       <form>
@@ -39,10 +43,8 @@ const AccountInfo = ({ formState, setFormState }) => {
       </form>
       <button onClick={handleFormChange}>NEXT</button>
       </>
-      }
     </>
   )
 }
-
 
 export default AccountInfo
