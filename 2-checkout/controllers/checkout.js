@@ -12,6 +12,5 @@ module.exports = {
         console.log(err)
         res.sendStatus(400)
       })
-
   },
 }

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import AccountInfo from './AccountInfo.jsx'
 import ShippingInfo from './ShippingInfo.jsx'
 import BillingInfo from './BillingInfo.jsx'
+import Confirmation from './Confirmation.jsx'
 
 const App = () => {
   const [inputs, setInputs] = useState({
@@ -51,6 +52,9 @@ const App = () => {
 
       {formState.displayBillingInfo &&
       <BillingInfo inputs={inputs} setInputs={setInputs} formState={formState} setFormState={setFormState}/>}
+
+      {formState.displayConfirmationInfo &&
+      <Confirmation inputs={inputs} setInputs={setInputs} formState={formState} setFormState={setFormState}/>}
     </>
   )
 }
