@@ -3,13 +3,13 @@ import axios from 'axios'
 
 const Confirmation = ({ inputs, setInputs,formState, setFormState }) => {
 
+  const body = {
+    ...inputs,
+    session_id: 11111
+  }
+
   const handleSubmit = () => {
     event.preventDefault()
-
-    let body = {
-      ...inputs,
-      session_id: 11111
-    }
 
     axios.post('/api/checkout', body)
       .then(() => {
@@ -23,8 +23,12 @@ const Confirmation = ({ inputs, setInputs,formState, setFormState }) => {
 
   return (
     <>
+      {Object.entries(inputs).map(([key, value]) => {
+        return <p>{`${key}: ${value}`} </p>
+      })}
+
       <form onSubmit={handleSubmit}>
-        <button>COMPLETE</button>
+        <button>COMPLETE YOUR PURCHASE</button>
       </form>
     </>
   )
